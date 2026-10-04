@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="420.0" prefWidth="340.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.creditcore.LoginController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <Label text="CreditCore">
+        <font>
+            <Font name="JetBrains Mono Regular" size="24.0" />
+        </font>
+    </Label>
+
+    <VBox alignment="TOP_CENTER" prefWidth="380.0" spacing="20.0">
+        <children>
+            <Label text="Вход в систему" textFill="#6f6f6f">
+                <font>
+                    <Font name="JetBrains Mono Regular" size="14.0" />
+                </font>
+            </Label>
+            <ComboBox fx:id="roleBox" maxWidth="Infinity" promptText="Выберите роль" />
+            <TextField fx:id="loginField" prefHeight="25.0" prefWidth="356.0" promptText="Логин" />
+            <PasswordField fx:id="passField" promptText="Пароль" />
+            <Label fx:id="errorLabel" textFill="#c0392b" wrapText="true" />
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="100.0" text="Вход">
+                <font>
+                    <Font name="JetBrains Mono Regular" size="12.0" />
+                </font>
+            </Button>
+        </children>
+    </VBox>
+
+    <Region VBox.vgrow="ALWAYS" />
+
+    <HBox alignment="BOTTOM_LEFT">
+        <children>
+            <Button mnemonicParsing="false" onAction="#exit" prefHeight="35.0" prefWidth="100.0" text="Выход">
+                <font>
+                    <Font name="JetBrains Mono Regular" size="12.0" />
+                </font>
+            </Button>
+        </children>
+    </HBox>
+</VBox>
