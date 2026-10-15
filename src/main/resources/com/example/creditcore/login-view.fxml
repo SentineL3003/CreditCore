@@ -25,7 +25,7 @@
             </Label>
             <ComboBox fx:id="roleBox" maxWidth="Infinity" promptText="Выберите роль" />
             <TextField fx:id="loginField" prefHeight="25.0" prefWidth="356.0" promptText="Логин" />
-            <PasswordField fx:id="passField" promptText="Пароль" />
+            <PasswordField fx:id="passField" prefHeight="25.0" prefWidth="274.0" promptText="Пароль" />
             <Label fx:id="errorLabel" textFill="#c0392b" wrapText="true" />
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="100.0" text="Вход">
                 <font>
