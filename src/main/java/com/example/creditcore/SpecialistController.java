@@ -34,11 +34,11 @@ public class SpecialistController {
     @FXML private TableColumn<Client, Integer> ratingColumn;
     @FXML private TableColumn<Client, String> statusColumn;
     // Поручитель
-    @FXML private TableView<Client> guarantorsTable;
-    @FXML private TableColumn<Client, Integer> guarIdColumn;
-    @FXML private TableColumn<Client, String> guarFioColumn;
-    @FXML private TableColumn<Client, String> guarPassportColumn;
-    @FXML private TableColumn<Client, String> guarContactColumn;
+    @FXML private TableView<Guarantor> guarantorsTable;
+    @FXML private TableColumn<Guarantor, Integer> guarIdColumn;
+    @FXML private TableColumn<Guarantor, String> guarFioColumn;
+    @FXML private TableColumn<Guarantor, String> guarPassportColumn;
+    @FXML private TableColumn<Guarantor, String> guarContactColumn;
     // Заявка
     @FXML private TableView<Request> requestsTable;
     @FXML private TableColumn<Request, Integer> reqIdColumn;
@@ -110,7 +110,7 @@ public class SpecialistController {
 
     private void loadGuarantors() {
         try {
-            guarantorsTable.setItems(FXCollections.observableArrayList(Client.findAll()));
+            guarantorsTable.setItems(FXCollections.observableArrayList(Guarantor.findAll()));
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,
                     "Не удалось загрузить поручителей: " + e.getMessage()).showAndWait();
