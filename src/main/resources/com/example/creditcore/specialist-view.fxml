@@ -33,9 +33,9 @@
                                 <HBox spacing="8.0">
                                     <children>
                                         <Button fx:id="addClientButton" onAction="#openAddClient" text="Добавить" />
-                                        <Button text="Удалить" />
+                                        <Button fx:id="deleteClientButton" onAction="#deleteClient" text="Удалить" />
                                         <Region HBox.hgrow="ALWAYS" />
-                                        <ComboBox fx:id="searchBy" prefWidth="124.0" promptText="Искать по" />
+                                        <ComboBox fx:id="clientSearchBy" prefWidth="124.0" promptText="Искать по" />
                                         <TextField fx:id="clientSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
@@ -66,9 +66,11 @@
                             <children>
                                 <HBox spacing="8.0">
                                     <children>
-                                        <Button text="Добавить" />
+                                        <Button fx:id="addGuarantorButton" onAction="#openAddGuarantor" text="Добавить" />
                                         <Button text="Удалить" />
                                         <Region HBox.hgrow="ALWAYS" />
+                                        <ComboBox fx:id="guarSearchBy" prefWidth="124.0" promptText="Искать по" />
+                                        <TextField fx:id="guarSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
                                 <TableView fx:id="guarantorsTable" VBox.vgrow="ALWAYS">
@@ -98,6 +100,8 @@
                                         <Button text="Добавить" />
                                         <Button text="Удалить" />
                                         <Region HBox.hgrow="ALWAYS" />
+                                        <ComboBox fx:id="reqSearchBy" prefWidth="124.0" promptText="Искать по" />
+                                        <TextField fx:id="reqSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
                                 <TableView fx:id="requestsTable" VBox.vgrow="ALWAYS">
@@ -131,6 +135,8 @@
                                         <Button text="Добавить" />
                                         <Button text="Удалить" />
                                         <Region HBox.hgrow="ALWAYS" />
+                                        <ComboBox fx:id="contSearchBy" prefWidth="124.0" promptText="Искать по" />
+                                        <TextField fx:id="contSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
                                 <TableView fx:id="contractsTable" VBox.vgrow="ALWAYS">

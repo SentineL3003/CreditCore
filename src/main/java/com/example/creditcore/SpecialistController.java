@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -136,6 +138,26 @@ public class SpecialistController {
     }
 
     @FXML
+    private void deleteClient() {
+        Client selected = clientsTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Выберите клиента в таблице").showAndWait();
+            return;
+        }
+
+        try (Connection conn = Database.getConnection();
+             CallableStatement cs = conn.prepareCall("{call Удалить_клиента(?)}")) {
+
+            cs.setInt(1, selected.getId());
+            cs.execute();
+            loadClients();
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
+        }
+    }
+
+    @FXML
     private void openAddClient() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("addClient-view.fxml"));
@@ -147,6 +169,27 @@ public class SpecialistController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(addClientButton.getScene().getWindow());
             stage.showAndWait();
+
+            loadClients();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openAddGuarantor() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addGuarantor-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Новый поручитель");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(addClientButton.getScene().getWindow());
+            stage.showAndWait();
+
+            loadGuarantors();
         } catch (IOException e) {
             e.printStackTrace();
         }
