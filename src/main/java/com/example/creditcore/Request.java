@@ -37,8 +37,7 @@ public class Request {
     public String getStatus() { return status; }
 
     public static List<Request> findAll() throws SQLException {
-        String sql = "SELECT Номер_заявки, Дата_подачи, Номер_клиента, Номер_сотрудника, "
-                + "Сумма, Срок, Цель, Статус FROM Заявка ORDER BY Номер_заявки";
+        String sql = "SELECT * FROM Заявка ORDER BY Номер_заявки";
         List<Request> list = new ArrayList<>();
 
         try (Connection conn = Database.getConnection();

@@ -24,7 +24,7 @@ public class Guarantor {
 
 
     public static List<Guarantor> findAll() throws SQLException {
-        String sql = "SELECT Номер_поручителя, ФИО, Паспортные_данные, Контактные_данные FROM Поручитель ORDER BY Номер_поручителя";
+        String sql = "SELECT * FROM Поручитель ORDER BY Номер_поручителя";
 
         List<Guarantor> list = new ArrayList<>();
 

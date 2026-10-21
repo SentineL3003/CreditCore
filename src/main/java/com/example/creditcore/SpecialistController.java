@@ -4,14 +4,13 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -24,6 +23,9 @@ import java.time.LocalDate;
 
 public class SpecialistController {
     @FXML private Button addClientButton;
+    @FXML private TextField clientSearch;
+    private final ObservableList<Client> clients = FXCollections.observableArrayList();
+    @FXML private ComboBox<String> clientSearchBy;
 
     //    ТАБЛИЦЫ
     // Клиент
@@ -95,6 +97,19 @@ public class SpecialistController {
         contEndDateColumnColumn.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getEndDate()));
         contStatusColumnColumn.setCellValueFactory(c -> new ReadOnlyStringWrapper(c.getValue().getStatus()));
 
+        FilteredList<Client> filteredClients = new FilteredList<>(clients, c -> true);
+        clientsTable.setItems(filteredClients);
+
+        clientSearch.textProperty().addListener((obs, oldText, newText) -> {
+            String text = newText.trim().toLowerCase();
+            filteredClients.setPredicate(client ->
+                    text.isEmpty()
+                            || client.getFIO().toLowerCase().contains(text)
+                            || client.getPassport().toLowerCase().contains(text)
+                            || client.getContact().toLowerCase().contains(text)
+                            || client.getStatus().toLowerCase().contains(text));
+        });
+
         loadClients();
         loadGuarantors();
         loadRequests();
@@ -103,7 +118,7 @@ public class SpecialistController {
 
     private void loadClients() {
         try {
-            clientsTable.setItems(FXCollections.observableArrayList(Client.findAll()));
+            clients.setAll(Client.findAll());
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,
                     "Не удалось загрузить клиентов: " + e.getMessage()).showAndWait();
@@ -155,6 +170,26 @@ public class SpecialistController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
+    }
+
+    @FXML
+    private void deleteGuarantor() {
+        Guarantor selected = guarantorsTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Выберите поручителя в таблице").showAndWait();
+            return;
+        }
+
+        try (Connection conn = Database.getConnection();
+             CallableStatement cs = conn.prepareCall("{call Удалить_поручителя(?)}")) {
+
+            cs.setInt(1, selected.getId());
+            cs.execute();
+            loadGuarantors();
+        }  catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
+        }
+
     }
 
     @FXML

@@ -34,10 +34,7 @@ public class Client {
 
     // Получение всех клиентов из базы данных
     public static List<Client> findAll() throws SQLException {
-        String sql = "SELECT Номер_клиента, ФИО, Паспортные_данные, " +
-                "Контактные_данные, Дата_регистрации, " +
-                "Кредитный_рейтинг, Статус_клиента " +
-                "FROM Клиент ORDER BY Номер_клиента";
+        String sql = "SELECT * FROM Клиент ORDER BY Номер_клиента";
 
         List<Client> list = new ArrayList<>();
 

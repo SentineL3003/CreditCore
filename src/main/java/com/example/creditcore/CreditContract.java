@@ -38,9 +38,7 @@ public class CreditContract {
     public String getStatus() { return status; }
 
     public static List<CreditContract> findAll() throws SQLException {
-        String sql = "SELECT Код_договора, Дата_заключения, Номер_заявки, Сумма_выдачи, "
-                + "Процентная_ставка, Схема_погашения, Дата_окончания, Статус "
-                + "FROM Кредитный_договор ORDER BY Код_договора";
+        String sql = "SELECT * FROM Кредитный_договор ORDER BY Код_договора";
         List<CreditContract> list = new ArrayList<>();
 
         try (Connection conn = Database.getConnection();

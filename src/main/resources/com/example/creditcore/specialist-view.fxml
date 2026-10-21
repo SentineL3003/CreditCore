@@ -67,7 +67,7 @@
                                 <HBox spacing="8.0">
                                     <children>
                                         <Button fx:id="addGuarantorButton" onAction="#openAddGuarantor" text="Добавить" />
-                                        <Button text="Удалить" />
+                                        <Button onAction="#deleteGuarantor" text="Удалить" />
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ComboBox fx:id="guarSearchBy" prefWidth="124.0" promptText="Искать по" />
                                         <TextField fx:id="guarSearch" prefWidth="178.0" promptText="Поиск" />
