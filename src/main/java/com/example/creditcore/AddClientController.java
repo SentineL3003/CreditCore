@@ -1,6 +1,5 @@
 package com.example.creditcore;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;

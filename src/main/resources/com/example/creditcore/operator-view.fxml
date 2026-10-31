@@ -12,12 +12,12 @@
                 <Insets left="12.0" right="12.0" />
             </padding>
             <children>
-                <Label text="CreditCore">
+                <Label prefHeight="32.0" prefWidth="373.0" text="Кредитная организация">
                     <font>
                         <Font name="JetBrains Mono Regular" size="24.0" />
                     </font>
                 </Label>
-                <Region prefHeight="51.0" prefWidth="521.0" HBox.hgrow="ALWAYS" />
+                <Region prefHeight="51.0" prefWidth="248.0" HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#exit" prefWidth="100.0" text="Выход" />
             </children>
         </HBox>
@@ -32,8 +32,6 @@
                             <children>
                                 <HBox spacing="8.0">
                                     <children>
-                                        <Button fx:id="addClientButton" text="Добавить" />
-                                        <Button text="Удалить" />
                                         <Region HBox.hgrow="ALWAYS" />
                                         <ComboBox fx:id="searchBy" prefWidth="124.0" promptText="Искать по" />
                                         <TextField fx:id="clientSearch" prefWidth="178.0" promptText="Поиск" />
@@ -66,9 +64,9 @@
                             <children>
                                 <HBox spacing="8.0">
                                     <children>
-                                        <Button text="Добавить" />
-                                        <Button text="Удалить" />
                                         <Region HBox.hgrow="ALWAYS" />
+                                        <ComboBox fx:id="contSearchBy" prefWidth="124.0" promptText="Искать по" />
+                                        <TextField fx:id="contClientSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
                                 <TableView fx:id="contractsTable" VBox.vgrow="ALWAYS">

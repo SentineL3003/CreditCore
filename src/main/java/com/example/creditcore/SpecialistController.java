@@ -201,9 +201,7 @@ public class SpecialistController {
             Stage stage = new Stage();
             stage.setTitle("Новый клиент");
             stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(addClientButton.getScene().getWindow());
-            stage.showAndWait();
+            stage.show();
 
             loadClients();
         } catch (IOException e) {
@@ -220,11 +218,43 @@ public class SpecialistController {
             Stage stage = new Stage();
             stage.setTitle("Новый поручитель");
             stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(addClientButton.getScene().getWindow());
-            stage.showAndWait();
+            stage.show();
 
             loadGuarantors();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openAddRequest() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addRequest-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Новая заявка");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            loadRequests();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openAddContract() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addContract-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Новый договор");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            loadContracts();
         } catch (IOException e) {
             e.printStackTrace();
         }
