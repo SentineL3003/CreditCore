@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDate;
 
-
 public class AddRequestController {
     @FXML private TextField clientField;;
     @FXML private TextField employeeField;
@@ -23,6 +22,23 @@ public class AddRequestController {
     @FXML private TextField termField;
     @FXML private TextField purposeField;
     @FXML private Button cancelButton;
+
+    // Вызывается из SpecialistController до показа окна: клиент, выбранный в таблице
+    public void setClient(int clientId) {
+        clientField.setText(String.valueOf(clientId));
+        clientField.setEditable(false);   // уберите строку, если номер клиента можно менять
+    }
+
+    // Вызывается из SpecialistController до показа окна: сотрудник из сессии
+    public void setEmployee(int employeeId) {
+        employeeField.setText(String.valueOf(employeeId));
+        employeeField.setEditable(false);
+    }
+
+    private void initialize() {
+        submitDatePicker.setValue(LocalDate.now());
+    }
+
 
     @FXML
     private void onSave() {

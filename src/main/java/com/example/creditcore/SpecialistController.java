@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,6 +42,10 @@ public class SpecialistController {
     @FXML private TableColumn<Guarantor, String> guarFioColumn;
     @FXML private TableColumn<Guarantor, String> guarPassportColumn;
     @FXML private TableColumn<Guarantor, String> guarContactColumn;
+    //Клиент/Поручитель
+    @FXML private TableView<ClientGuarantor> cliGuarantorsTable;
+    @FXML private TableColumn<ClientGuarantor, Integer> cliGuarIdCColumn;
+    @FXML private TableColumn<ClientGuarantor, Integer> cliGuarIDGColumn;
     // Заявка
     @FXML private TableView<Request> requestsTable;
     @FXML private TableColumn<Request, Integer> reqIdColumn;
@@ -79,6 +82,9 @@ public class SpecialistController {
         guarPassportColumn.setCellValueFactory(c -> new ReadOnlyStringWrapper(c.getValue().getPassport()));
         guarContactColumn.setCellValueFactory(c -> new ReadOnlyStringWrapper(c.getValue().getContact()));
 
+        cliGuarIdCColumn.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getClintID()));
+        cliGuarIDGColumn.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getGuarantorID()));
+
         reqIdColumn.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getId()));
         reqDateColumn.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getDate()));
         reqClientColumn.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getClientId()));
@@ -112,6 +118,7 @@ public class SpecialistController {
 
         loadClients();
         loadGuarantors();
+        loadClientGuarantors();
         loadRequests();
         loadContracts();
     }
@@ -131,6 +138,15 @@ public class SpecialistController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR,
                     "Не удалось загрузить поручителей: " + e.getMessage()).showAndWait();
+        }
+    }
+
+    private void loadClientGuarantors() {
+        try {
+            cliGuarantorsTable.setItems(FXCollections.observableArrayList(ClientGuarantor.findAll()));
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,
+                    "Не удалось загрузить клиент/поручитель: " + e.getMessage()).showAndWait();
         }
     }
 
@@ -228,9 +244,20 @@ public class SpecialistController {
 
     @FXML
     private void openAddRequest() {
+        Client selected = clientsTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Выберите клиента в таблице").showAndWait();
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("addRequest-view.fxml"));
             Parent root = loader.load();
+
+            // передаём в окно клиента из таблицы и сотрудника из сессии
+            AddRequestController controller = loader.getController();
+            controller.setClient(selected.getId());
+            controller.setEmployee(Session.getEmployeeId());
 
             Stage stage = new Stage();
             stage.setTitle("Новая заявка");
@@ -245,6 +272,12 @@ public class SpecialistController {
 
     @FXML
     private void openAddContract() {
+        Request selected = requestsTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Выберите заявку в таблице").showAndWait();
+            return;
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("addContract-view.fxml"));
             Parent root = loader.load();

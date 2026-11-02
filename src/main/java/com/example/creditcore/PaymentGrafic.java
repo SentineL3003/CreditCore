@@ -40,7 +40,7 @@ public class PaymentGrafic {
 
     public static List<PaymentGrafic> findAll() throws SQLException {
         String sql = "SELECT Код_платежа, Код_договора, Дата_плановая, Сумма_плановая, "
-               + "Дата_фактическая, Сумма_фактическая, Пени FROM График_платежей ORDER BY Код_платежа";
+               + "Дата_фактическая, Сумма_фактическая, Пени FROM График_платежей";
 
         List<PaymentGrafic> list = new ArrayList<>();
 

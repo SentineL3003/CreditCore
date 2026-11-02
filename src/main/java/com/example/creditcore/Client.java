@@ -34,7 +34,7 @@ public class Client {
 
     // Получение всех клиентов из базы данных
     public static List<Client> findAll() throws SQLException {
-        String sql = "SELECT * FROM Клиент ORDER BY Номер_клиента";
+        String sql = "SELECT * FROM Клиент";
 
         List<Client> list = new ArrayList<>();
 
@@ -43,14 +43,12 @@ public class Client {
              ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
-                Date date = rs.getDate("Дата_регистрации");
-
                 list.add(new Client(
                         rs.getInt("Номер_клиента"),
                         rs.getString("ФИО"),
                         rs.getString("Паспортные_данные"),
                         rs.getString("Контактные_данные"),
-                        date == null ? null : date.toLocalDate(),
+                        rs.getDate("Дата_регистрации").toLocalDate(),
                         rs.getInt("Кредитный_рейтинг"),
                         rs.getString("Статус_клиента")
                 ));

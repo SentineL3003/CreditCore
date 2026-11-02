@@ -28,7 +28,7 @@ public class Receipt {
     public BigDecimal getAmount() { return amount; }
 
     public static List<Receipt> findAll() throws SQLException {
-        String sql = "SELECT * FROM Поступление ORDER BY Код_поступления";
+        String sql = "SELECT * FROM Поступление";
 
         List<Receipt> list = new ArrayList<>();
 

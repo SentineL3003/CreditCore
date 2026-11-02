@@ -7,7 +7,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.creditcore.OperatorController">
     <children>
-        <HBox alignment="CENTER_LEFT" prefHeight="51.0" spacing="10.0">
+        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="860.0" spacing="10.0">
             <padding>
                 <Insets left="12.0" right="12.0" />
             </padding>
@@ -21,7 +21,7 @@
                 <Button mnemonicParsing="false" onAction="#exit" prefWidth="100.0" text="Выход" />
             </children>
         </HBox>
-        <TabPane prefHeight="668.0" prefWidth="860.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="626.0" prefWidth="860.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Клиенты">
                     <content>
@@ -32,12 +32,11 @@
                             <children>
                                 <HBox spacing="8.0">
                                     <children>
-                                        <Region HBox.hgrow="ALWAYS" />
                                         <ComboBox fx:id="searchBy" prefWidth="124.0" promptText="Искать по" />
                                         <TextField fx:id="clientSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
-                                <TableView fx:id="clientsTable" VBox.vgrow="ALWAYS">
+                                <TableView fx:id="clientsTable" prefHeight="523.0" prefWidth="840.0" VBox.vgrow="ALWAYS">
                                     <columns>
                                         <TableColumn fx:id="idColumn" text="№" />
                                         <TableColumn fx:id="fioColumn" text="ФИО" />
@@ -64,7 +63,6 @@
                             <children>
                                 <HBox spacing="8.0">
                                     <children>
-                                        <Region HBox.hgrow="ALWAYS" />
                                         <ComboBox fx:id="contSearchBy" prefWidth="124.0" promptText="Искать по" />
                                         <TextField fx:id="contClientSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
@@ -97,9 +95,8 @@
                             <children>
                                 <HBox spacing="8.0">
                                     <children>
-                                        <Button text="Добавить" />
-                                        <Button text="Удалить" />
-                                        <Region HBox.hgrow="ALWAYS" />
+                                        <ComboBox fx:id="grafSearchBy" prefWidth="124.0" promptText="Искать по" />
+                                        <TextField fx:id="grafClientSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
                                 <TableView fx:id="graficTable" VBox.vgrow="ALWAYS">
@@ -129,9 +126,8 @@
                             <children>
                                 <HBox spacing="8.0">
                                     <children>
-                                        <Button text="Добавить" />
-                                        <Button text="Удалить" />
-                                        <Region HBox.hgrow="ALWAYS" />
+                                        <ComboBox fx:id="recSearchBy" prefWidth="124.0" promptText="Искать по" />
+                                        <TextField fx:id="recClientSearch" prefWidth="178.0" promptText="Поиск" />
                                     </children>
                                 </HBox>
                                 <TableView fx:id="receiptsTable" VBox.vgrow="ALWAYS">
@@ -151,5 +147,15 @@
                 </Tab>
             </tabs>
         </TabPane>
+        <HBox alignment="CENTER" prefHeight="59.0" prefWidth="860.0" spacing="8.0">
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="5.0" />
+            </padding>
+            <children>
+                <Button fx:id="addClientButton"  prefHeight="30.0" prefWidth="150.0" text="Заполнить платёж" />
+                <Button fx:id="deleteClientButton" prefHeight="30.0" text="Добавить поступление" />
+                <Button fx:id="addGuarantorButton"  prefHeight="30.0" text="Закрыть договор" />
+            </children>
+        </HBox>
     </children>
 </VBox>
