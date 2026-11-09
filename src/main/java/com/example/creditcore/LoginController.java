@@ -57,9 +57,6 @@ public class LoginController {
         } catch (SQLException | IOException e) {
             errorLabel.setText("Ошибка: " + e.getMessage());
         }
-
-
-        openMainWindow();
     }
 
     private void openMainWindow() throws IOException {

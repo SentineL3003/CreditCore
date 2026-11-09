@@ -35,10 +35,10 @@ public class AddRequestController {
         employeeField.setEditable(false);
     }
 
+    @FXML
     private void initialize() {
         submitDatePicker.setValue(LocalDate.now());
     }
-
 
     @FXML
     private void onSave() {

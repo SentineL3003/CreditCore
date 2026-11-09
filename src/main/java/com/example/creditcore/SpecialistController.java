@@ -243,6 +243,23 @@ public class SpecialistController {
     }
 
     @FXML
+    private void openAddClientGuarantor() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addClientGuarantor-view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Привязка клиента к поручителю");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            loadClientGuarantors();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void openAddRequest() {
         Client selected = clientsTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
@@ -261,6 +278,32 @@ public class SpecialistController {
 
             Stage stage = new Stage();
             stage.setTitle("Новая заявка");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            loadRequests();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void openChangeRequestStatus() {
+        Request selected = requestsTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            new Alert(Alert.AlertType.INFORMATION, "Выберите заявку в таблице").showAndWait();
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("changeRequestStatus-view.fxml"));
+            Parent root = loader.load();
+
+            ChangeRequestStatusController controller= loader.getController();
+            controller.setRequest(selected.getId());
+
+            Stage stage = new Stage();
+            stage.setTitle("Изменение статуса заявки");
             stage.setScene(new Scene(root));
             stage.show();
 
